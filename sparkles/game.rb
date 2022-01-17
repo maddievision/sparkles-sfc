@@ -16,9 +16,9 @@ module Sparkles
       sta Snes.reg_INIDISP
 
       stz Snes.reg_BGMODE
-      lda.b (Program.vram_bg1 >> 8)
+      lda.b (GfxCore.vram_bg1 >> 8)
       sta Snes.reg_BG1SC
-      lda.b ((Program.vram_charset >> 12) | ((Program.vram_charset >> 8) & 0xF0))
+      lda.b ((GfxCore.vram_charset >> 12) | ((GfxCore.vram_charset >> 8) & 0xF0))
       sta Snes.reg_BG12NBA
 
       jsr GfxCore.load_font

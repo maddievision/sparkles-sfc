@@ -12,11 +12,11 @@ module Sparkles
       [Snes, Game, Draw, GfxCore, Header]
     end
 
-    equate :vram_charset, 0
-    equate :vram_bg1, 0x1000
-    equate :vram_bg2, 0x1400
-    equate :vram_bg3, 0x1800
-    equate :vram_bg4, 0x1C00
+    SIZE_KB = 32      
+
+    global_var :rom_size_bytes, SIZE_KB << 10
+    global_var :memory_base, 0      
+    equate :rom_size_exp, (Math.log(SIZE_KB) / Math.log(2)).to_i
 
     def_code :main, 0x8000 do
       jmp Game.start

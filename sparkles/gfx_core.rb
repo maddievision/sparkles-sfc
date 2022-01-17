@@ -3,6 +3,12 @@ require './lib/png_convert'
 
 module Sparkles
   class GfxCore < SnesBuilder::AssemblyModule
+    equate :vram_charset, 0
+    equate :vram_bg1, 0x1000
+    equate :vram_bg2, 0x1400
+    equate :vram_bg3, 0x1800
+    equate :vram_bg4, 0x1C00
+
     def_sub :load_font do
       php
       phx
@@ -12,7 +18,7 @@ module Sparkles
 
       lda.b 0x80
       sta Snes.reg_VMAIN
-      ldx.w Program.vram_charset
+      ldx.w GfxCore.vram_charset
       stx Snes.reg_VMADDL
       ldx.w 0
 

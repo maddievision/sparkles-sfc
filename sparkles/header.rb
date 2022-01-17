@@ -2,19 +2,12 @@ require './lib/snes_builder'
 
 module Sparkles
   class Header < SnesBuilder::AssemblyModule
-    SIZE_KB = 32      
-
-    global_var :rom_size_bytes, SIZE_KB << 10
-    global_var :memory_base, 0
-      
-    equate :rom_size_exp, (Math.log(SIZE_KB) / Math.log(2)).to_i
-
     def_data :rom_name, Snes.addr_rom_name do
       data "SPARKLES"
     end
 
     def_data :rom_info, Snes.addr_rom_info do
-      data [0x30, 0, Header.rom_size_exp, 0]
+      data [0x30, 0, Program.rom_size_exp, 0]
       data 0xAAAA
       data 0x5555
     end    
