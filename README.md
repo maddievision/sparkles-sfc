@@ -1,1 +1,1 @@
-![GIF of sparkles.sfc emulation](https://github.com/[username]/[reponame]/blob/main/sparkles.gif?raw=true)
+![GIF of sparkles.sfc emulation](https://github.com/maddievision/sparkles-sfc/blob/main/sparkles.gif?raw=true)
