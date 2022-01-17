@@ -18,13 +18,13 @@ module Sparkles
 
       jsr ___(:gfx_core, :load_palettes)
 
-      lda.i8 0x80
+      lda.b 0x80
       sta rINIDISP
 
       stz rBGMODE
-      lda.i8 (vram_bg1 >> 8)
+      lda.b (vram_bg1 >> 8)
       sta rBG1SC
-      lda.i8 ((vram_charset >> 12) | ((vram_charset >> 8) & 0xF0))
+      lda.b ((vram_charset >> 12) | ((vram_charset >> 8) & 0xF0))
       sta rBG12NBA
 
       jsr ___(:gfx_core, :load_font)
@@ -32,12 +32,12 @@ module Sparkles
 
       label __(:enable_display)
 
-        lda.i8 0x1
+        lda.b 0x1
         sta rTM
-        lda.i8 0xF
+        lda.b 0xF
         sta rINIDISP
 
-        lda.i8 0x81 # and controller
+        lda.b 0x81 # and controller
         sta rNMITIMEN
 
       jmp __(:game_loop)
@@ -80,10 +80,10 @@ module Sparkles
 
       lda addr_joy
       tax
-      anda.i16 0x100
+      anda.w 0x100
       bne _(:right)
       txa
-      anda.i16 0x200
+      anda.w 0x200
       bne _(:left)
 
       bra _(:vertical)
@@ -91,23 +91,23 @@ module Sparkles
     label _(:right)
       lda addr_curs_x
       inc
-      anda.i16 0x1F
+      anda.w 0x1F
       sta addr_curs_x
       bra _(:vertical)
 
     label _(:left)
       lda addr_curs_x
       dec
-      anda.i16 0x1F
+      anda.w 0x1F
       sta addr_curs_x
 
     label _(:vertical)
 
       txa
-      anda.i16 0x800
+      anda.w 0x800
       bne _(:up)
       txa
-      anda.i16 0x400
+      anda.w 0x400
       bne _(:down)
 
       bra _(:exit)
@@ -116,7 +116,7 @@ module Sparkles
       lda addr_curs_y
       dec
       bpl _(:overflow1)
-      lda.i16 0x1B
+      lda.w 0x1B
 
     label _(:overflow1)
       sta addr_curs_y
@@ -125,9 +125,9 @@ module Sparkles
     label _(:down)
       lda addr_curs_y
       inc
-      cmp.i16 0x1C
+      cmp.w 0x1C
       bcc _(:overflow2)
-      lda.i16 0
+      lda.w 0
 
     label _(:overflow2)
       sta addr_curs_y

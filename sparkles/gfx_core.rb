@@ -14,11 +14,11 @@ module Sparkles
       rep 0x10
       sep 0x20
 
-      lda.i8 0x80
+      lda.b 0x80
       sta rVMAIN
-      ldx.i16 vram_charset
+      ldx.w vram_charset
       stx rVMADDL
-      ldx.i16 0
+      ldx.w 0
 
       rep 0x30
 
@@ -27,7 +27,7 @@ module Sparkles
       sta rVMDATAL
       inx
       inx
-      cpx.i16 0x1000
+      cpx.w 0x1000
       bne _(:loop)
 
       plx
@@ -43,14 +43,14 @@ module Sparkles
 
       stz rCGADD
 
-      ldx.i16 0
+      ldx.w 0
 
       label _(:loop)
 
         lda.ax __(:palette)
         sta rCGDATA
         inx
-        cpx.i16 0x8 * 2
+        cpx.w 0x8 * 2
         bcc _(:loop)
 
       plx

@@ -7,8 +7,8 @@ require 'json'
 module Snesasm
   # Known addressing modes
   ADDR_MODES = {
-    i8: { src: ' #%s', len: 1, args: 1},
-    i16: { src: ' #%s', len: 2, args: 1},
+    b: { src: ' #%s', len: 1, args: 1},
+    w: { src: ' #%s', len: 2, args: 1},
     a: { src: ' %s', len: 2, args: 1},
     al: { src: ' %s', len: 3, args: 1},
     z: { src: ' %s', len: 1, args: 1},

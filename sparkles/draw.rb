@@ -36,10 +36,10 @@ module Sparkles
       stz addr_pos
       stz addr_text_drawn
       stz addr_logo_drawn
-      lda.i16 0x2
+      lda.w 0x2
       sta addr_curs_x
       sta addr_curs_y
-      lda.i16 wait_time
+      lda.w wait_time
       sta addr_draw_wait
       plp
     end
@@ -52,7 +52,7 @@ module Sparkles
       lda addr_draw_wait
       bne _(:exit)
 
-      lda.i16 wait_time
+      lda.w wait_time
       sta addr_draw_wait
 
       jsr __(:render_logo)
@@ -78,13 +78,13 @@ module Sparkles
       stz addr_logo_row
 
     label _(:next_row)
-      ldx.i16 0
+      ldx.w 0
 
     label _(:next_col)
       lda addr_logo_row
       5.times { asl }
       clc
-      adc.i16 logo_base
+      adc.w logo_base
       sta addr_tmp1
       txa
     
@@ -95,7 +95,7 @@ module Sparkles
       lda addr_logo_row
       4.times { asl }
       clc
-      adc.i16 0x24A0
+      adc.w 0x24A0
       sta addr_tmp1
 
       txa
@@ -104,12 +104,12 @@ module Sparkles
       sta rVMDATAL
 
       inx
-      cpx.i16 0x8
+      cpx.w 0x8
       bcc _(:next_col)
 
       lda addr_logo_row
       inc
-      cmp.i16 0x07
+      cmp.w 0x07
       bcs _(:exit)
       sta addr_logo_row
       bra _(:next_row)
@@ -129,33 +129,33 @@ module Sparkles
       clc
       adc.a addr_curs_x
       clc
-      adc.i16 vram_base
+      adc.w vram_base
       sta rVMADDL
 
-      lda.i16 0x2090
+      lda.w 0x2090
       sta rVMDATAL
 
       lda addr_text_drawn
-      anda.i16 0xFF
+      anda.w 0xFF
       bne _(:exit)
 
       lda addr_pos
       tax
       inc.a addr_pos
       clc
-      adc.i16 text_base
+      adc.w text_base
       sta rVMADDL
 
       lda.ax __(:hello_str)
-      anda.i16 0xFF
+      anda.w 0xFF
       bne _(:draw_char)
-      lda.i16 0xFF
+      lda.w 0xFF
       sta addr_text_drawn
       bra _(:exit)
 
     label _(:draw_char)
       clc
-      adc.i16 0x2000
+      adc.w 0x2000
       sta rVMDATAL
 
     label _(:exit)

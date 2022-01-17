@@ -68,12 +68,12 @@ module Snesasm
         @mode = opcode.keys.first
       elsif arg and arg.instance_of? Integer
         # for the rest, let's try figure out mode by checking argument
-        # we treat addressing modes as of higher priority, eg. :z over :i8
+        # we treat addressing modes as of higher priority, eg. :z over :b
         if arg >= 0 and arg <= 255
           if opcode.has_key? :z
             @mode = :z
-          elsif opcode.has_key? :i8
-            @mode = :i8
+          elsif opcode.has_key? :b
+            @mode = :b
           else
             raise OperandError, 'No mode handling byte'
           end
@@ -187,7 +187,7 @@ module Snesasm
         bytes += [Snesasm.ms_byte(@arg), Snesasm.ls_byte(@arg)]
       elsif [:al, :alx].include?(@mode) || (@arg && @arg > 65536)
         bytes += [Snesasm.ls_byte(@arg), Snesasm.ms_byte(@arg), Snesasm.hi_byte(@arg)]
-      elsif [:a, :ax, :ay, :ar, :i16].include?(@mode) || (@arg && @arg > 255)
+      elsif [:a, :ax, :ay, :ar, :w].include?(@mode) || (@arg && @arg > 255)
         bytes += [Snesasm.ls_byte(@arg), Snesasm.ms_byte(@arg)]
       elsif @arg
         bytes += [@arg]
@@ -242,13 +242,13 @@ module Snesasm
       elsif @mod.instance_of? Array and @mod.length == 2 and [:/, :*, :<<, :>>, :& , :|].member? @mod.first
         raise OperandError, 'Arithmetic argument has to be an integer' unless @mod[1].instance_of? Integer
       elsif [:<, :>].member? @mod
-        # this two modifiers make sense only for :i8 addressing mode
-        if not @mode or (@mode and @mode != :i8)
-          unless OP_CODES[@op].has_key? :i8
+        # this two modifiers make sense only for :b addressing mode
+        if not @mode or (@mode and @mode != :b)
+          unless OP_CODES[@op].has_key? :b
             raise OperandError, 'Byte modifier used with non-direct addressing mode'
           end
 
-          @mode = :i8
+          @mode = :b
         end
 
         @mod = [@mod == :< ? :ls_byte : :ms_byte]
@@ -261,8 +261,8 @@ module Snesasm
     def validate
       if (@mode == :n and @arg) or \
         (@mode == :r and not (@arg >= -128 and @arg <= 127)) or \
-        ([:i16, :a, :ax, :ay, :ar].member? @mode and not (@arg >= 0 and @arg <= 65535)) or \
-        ([:i8, :z, :zx, :zy, :zxr, :zyr].member? @mode and not (@arg >= 0 and @arg <= 255))
+        ([:w, :a, :ax, :ay, :ar].member? @mode and not (@arg >= 0 and @arg <= 65535)) or \
+        ([:b, :z, :zx, :zy, :zxr, :zyr].member? @mode and not (@arg >= 0 and @arg <= 255))
         false
       else
         true
