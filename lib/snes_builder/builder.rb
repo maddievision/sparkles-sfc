@@ -131,6 +131,7 @@ module SnesBuilder
         puts
         puts "%-16s %20s" % ["end vars", Util.addr_str(memory_base)]
         puts
+        puts "Written to: #{outfn}"
       end
     end
   end

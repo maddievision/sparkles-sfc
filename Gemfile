@@ -9,3 +9,5 @@ git_source(:github) { |repo_name| "https://github.com/#{repo_name}" }
 
 
 gem "chunky_png", "~> 1.4"
+
+gem "rake", "~> 13.0"
