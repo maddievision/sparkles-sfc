@@ -72,7 +72,7 @@ module Sparkles
       rti
     end
 
-    def_code :joy do
+    def_sub :joy do
       php
       phx
 
@@ -88,20 +88,20 @@ module Sparkles
 
       bra _(:vertical)
 
-      label _(:right)
+    label _(:right)
       lda addr_curs_x
       inc
       anda.i16 0x1F
       sta addr_curs_x
       bra _(:vertical)
 
-      label _(:left)
+    label _(:left)
       lda addr_curs_x
       dec
       anda.i16 0x1F
       sta addr_curs_x
 
-      label _(:vertical)
+    label _(:vertical)
 
       txa
       anda.i16 0x800
@@ -112,31 +112,29 @@ module Sparkles
 
       bra _(:exit)
 
-      label _(:up)
+    label _(:up)
       lda addr_curs_y
       dec
       bpl _(:overflow1)
       lda.i16 0x1B
 
-      label _(:overflow1)
+    label _(:overflow1)
       sta addr_curs_y
       bra _(:exit)
 
-      label _(:down)
+    label _(:down)
       lda addr_curs_y
       inc
       cmp.i16 0x1C
       bcc _(:overflow2)
       lda.i16 0
 
-      label _(:overflow2)
+    label _(:overflow2)
       sta addr_curs_y
 
-      label _(:exit)
-
+    label _(:exit)
       plx
       plp
-      rts
     end
   end
 end

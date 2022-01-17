@@ -567,9 +567,9 @@ module Snesasm
       addr = @linked.first
       lines = []
 
-      lines.push('$%0.4x   ' % addr +  "           \t.block")
+      lines.push("(%02X:%04X)  " % [addr >> 16, addr & 0xFFFF] + "           \t.block")
       each do |e|
-        line = ('$%0.4x   ' % addr).upcase
+        line = ("(%02X:%04X)  " % [addr >> 16, addr & 0xFFFF]).upcase
         block = false
 
         case e
@@ -584,6 +584,10 @@ module Snesasm
           line += ' ' * (9 - (3 * bytes.length))
           line += "   \t#{e.to_source}"
           addr += e.length
+          # TODO(maddie): HACK!
+          if addr > 0xFFFF
+            addr += 0x8000
+          end
         when Align
           line += "           \t#{e.to_source}"
           addr = e.addr
@@ -597,7 +601,7 @@ module Snesasm
 
         lines.push(line) unless block
       end
-      lines.push('$%0.4x   ' % addr +  "           \t.bend")
+      lines.push("(%02X:%04X)  " % [addr >> 16, addr & 0xFFFF] +  "           \t.bend")
 
       [addr, lines]
     end

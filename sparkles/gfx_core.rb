@@ -7,7 +7,7 @@ module Sparkles
       "gfx_core"
     end
 
-    def_code :load_font do
+    def_sub :load_font do
       php
       phx
 
@@ -32,10 +32,9 @@ module Sparkles
 
       plx
       plp
-      rts
     end
 
-    def_code :load_palettes do
+    def_sub :load_palettes do
       php
       phx
 
@@ -56,10 +55,9 @@ module Sparkles
 
       plx
       plp
-      rts
     end
 
-    def_code :palette, 0x8800 do
+    def_data :palette, 0x8800 do
       data SnesBuilder::Util.snes_color_from_hex(0xFFFFFF)
       data SnesBuilder::Util.snes_color_from_hex(0xDBAD03)
       data SnesBuilder::Util.snes_color_from_hex(0xEFC624)
@@ -71,7 +69,7 @@ module Sparkles
       data SnesBuilder::Util.snes_color_from_hex(0xD677D8)
     end
 
-    def_code :font, 0x9000 do
+    def_data :font, 0x9000 do
       data PngConvert.convert_to_2bpp("sparkles/data/font.png")
     end
   end

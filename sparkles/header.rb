@@ -15,17 +15,17 @@ module Sparkles
       }
     end
 
-    def_code :rom_name, 0xFFC0 do
+    def_data :rom_name, 0xFFC0 do
       data "SPARKLES"
     end
 
-    def_code :rom_info, 0xFFD5 do
+    def_data :rom_info, 0xFFD5 do
       data [0x30, 0, rom_size_exp, 0]
       data 0xAAAA
       data 0x5555
     end    
 
-    def_code :vectors_native, 0xFFE0 do
+    def_data :vectors_native, 0xFFE0 do
       data [0, 0]
       data [0, 0]
       data ___(:program, :rti)
@@ -36,7 +36,7 @@ module Sparkles
       data ___(:program, :rti)
     end
 
-    def_code :vectors_emulation, 0xFFF0 do
+    def_data :vectors_emulation, 0xFFF0 do
       data [0, 0]
       data [0, 0]
       data ___(:program, :rti)

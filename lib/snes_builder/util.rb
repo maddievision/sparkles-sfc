@@ -14,23 +14,27 @@ module SnesBuilder
     end
 
     def self.offset_to_addr offset
-      bank = offset / 0x8000 + 0x80
+      bank = offset / 0x8000
       addr = offset % 0x8000 + 0x8000
       (bank << 16) + addr
     end
 
     def self.offset_str offset
       addr = offset_to_addr(offset)
-      "0x%02X (%02X:%04X)" % [offset, addr >> 16, addr & 0xFFFF]
+      "0x%X (%02X:%04X)" % [offset, addr >> 16, addr & 0xFFFF]
     end
 
     def self.addr_str addr
       offset = addr_to_offset(addr)
-      "0x%02X (%02X:%04X)" % [offset, addr >> 16, addr & 0xFFFF]
+      "0x%X (%02X:%04X)" % [offset, addr >> 16, addr & 0xFFFF]
     end
 
     def self.addr_to_offset addr
       ((addr & 0x7F0000) >> 1) + (addr & 0x7FFF)
+    end
+
+    def self.addr_add addr, add
+      offset_to_addr(addr_to_offset(addr) + add)
     end
 
     def self.word_to_str val
@@ -49,21 +53,14 @@ module SnesBuilder
       code = macro.call
       puts code.dump
       bytes = code.to_binary
-      [bytes[2...(bytes.size)], vars.merge(code.labels)]
+      [bytes[2...(bytes.size)], code.labels]
     end
 
     def self.patch_asm(f, name, indent, addr, vars={}, &blk)
-      pastel = Pastel.new
-      bin, vars = assemble(addr & 0xFFFF, vars, &blk)
-      printstep "#{pastel.white(name)} (#{pastel.white("0x%X bytes" % bin.size)}) to #{pastel.white(addr_str(addr))}", type: "insert asm", indent: indent
+      bin, labels = assemble(addr & 0xFFFF, vars, &blk)
       seek_addr f, addr
       f.write_str bin
-      return vars.merge({
-        name.to_sym => addr & 0xFFFF,
-        "#{name}_long".to_sym => addr,
-        "#{name}_end".to_sym => (addr + bin.size) & 0xFFFF,
-        "#{name}_end_long".to_sym => (addr + bin.size),    
-      })
+      return labels.merge({ __end: addr_add(addr, bin.size) })
     end
 
     def self.snes_color(r, g, b)
@@ -128,20 +125,29 @@ module SnesBuilder
         fw.seek 0
         fw.write_str "\xFF" * root_globals[:rom_size_bytes]
       
-        v = Util.patch_asm(fw, "main", 0, 0x808000, v) do
+        labels = Util.patch_asm(fw, "main", 0, 0x8000, v) do
           root_exports.each do |mex|
             instance_exec(&mex[:code])
           end
         end
       
-        puts "Exports:"
+        lmod = nil
         root_exports.each do |x|
-          if x[:align]
-            puts "___(:#{x[:amod].name}, :#{x[:name]}) @ #{Util.addr_str(x[:align])}"
-          else
-            puts "___(:#{x[:amod].name}, :#{x[:name]})"
+          amod = x[:amod].name
+          if lmod != amod
+            lmod = amod
+            puts
           end
+          display_type = x[:meta][:block_type].to_s
+          if x[:meta][:block_type] == :code
+            display_type += "[#{x[:meta][:code_type]}]"
+          end
+          display_type = "%-16s" % display_type
+          display_addr = "%20s" % Util.addr_str(labels[x[:full_name].to_sym])
+          puts "#{display_type} #{display_addr} ___(:#{amod}, :#{x[:name]})"
         end
+        puts
+        puts "%-16s %20s" % ["end", Util.addr_str(labels[:__end])]
       end
     end
   end

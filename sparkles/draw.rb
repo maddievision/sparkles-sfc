@@ -30,7 +30,7 @@ module Sparkles
       }
     end
 
-    def_code :init do
+    def_sub :init do
       php
       rep 0x30
       stz addr_pos
@@ -42,11 +42,9 @@ module Sparkles
       lda.i16 wait_time
       sta addr_draw_wait
       plp
-
-      rts
     end
 
-    def_code :update do
+    def_sub :update do
       php
 
       rep 0x30
@@ -66,11 +64,9 @@ module Sparkles
       dec.a addr_draw_wait
 
       plp
-
-      rts
     end
 
-    def_code :render_logo do
+    def_sub :render_logo do
       php
       phx
 
@@ -86,7 +82,7 @@ module Sparkles
 
     label _(:next_col)
       lda addr_logo_row
-      asl; asl; asl; asl; asl
+      5.times { asl }
       clc
       adc.i16 logo_base
       sta addr_tmp1
@@ -97,10 +93,7 @@ module Sparkles
       sta rVMADDL
 
       lda addr_logo_row
-      asl
-      asl
-      asl
-      asl
+      4.times { asl }
       clc
       adc.i16 0x24A0
       sta addr_tmp1
@@ -124,16 +117,15 @@ module Sparkles
     label _(:exit)
       plx
       plp
-      rts
     end
 
-    def_code :render_text do
+    def_sub :render_text do
       php
       phx
 
       stz addr_tmp1
       lda addr_curs_y
-      asl; asl; asl; asl; asl
+      5.times { asl }
       clc
       adc.a addr_curs_x
       clc
@@ -169,10 +161,9 @@ module Sparkles
     label _(:exit)
       plx
       plp
-      rts
     end
 
-    def_code :hello_str do
+    def_data :hello_str do
       data "\x90 ~hello, sparkles!~ \x90\x0"
     end
   end
