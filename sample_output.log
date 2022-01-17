@@ -1,0 +1,344 @@
+(00:8000)             	.block
+(00:8000)             	* = $8000
+(00:8000)             	* = $8000
+(00:8000)             Program__main:
+(00:8000)  4C 07 80   	  JMP Game__start
+(00:8003)             Program__nmi:
+(00:8003)  4C 45 80   	  JMP Game__vblank
+(00:8006)             Program__rti:
+(00:8006)  40         	  RTI
+(00:8007)             Game__start:
+(00:8007)  18         	  CLC
+(00:8008)  FB         	  XCE
+(00:8009)  C2 10      	  REP #$10
+(00:800B)  E2 20      	  SEP #$20
+(00:800D)  20 AB 81   	  JSR GfxCore__load_palettes
+(00:8010)  A9 80      	  LDA #$80
+(00:8012)  8D 00 21   	  STA $2100
+(00:8015)  9C 05 21   	  STZ $2105
+(00:8018)  A9 10      	  LDA #$10
+(00:801A)  8D 07 21   	  STA $2107
+(00:801D)  A9 00      	  LDA #$00
+(00:801F)  8D 0B 21   	  STA $210B
+(00:8022)  20 85 81   	  JSR GfxCore__load_font
+(00:8025)  20 A8 80   	  JSR Draw__init
+(00:8028)  A9 01      	  LDA #$01
+(00:802A)  8D 2C 21   	  STA $212C
+(00:802D)  A9 0F      	  LDA #$0F
+(00:802F)  8D 00 21   	  STA $2100
+(00:8032)  A9 81      	  LDA #$81
+(00:8034)  8D 00 42   	  STA $4200
+(00:8037)  4C 3A 80   	  JMP Game__game_loop
+(00:803A)             Game__game_loop:
+(00:803A)  C2 30      	  REP #$30
+(00:803C)  CB         	  WAI
+(00:803D)  AD 18 42   	  LDA $4218
+(00:8040)  85 00      	  STA $00
+(00:8042)  4C 3A 80   	  JMP Game__game_loop
+(00:8045)             Game__vblank:
+(00:8045)  C2 10      	  REP #$10
+(00:8047)  E2 20      	  SEP #$20
+(00:8049)  0B         	  PHD
+(00:804A)  48         	  PHA
+(00:804B)  DA         	  PHX
+(00:804C)  5A         	  PHY
+(00:804D)  AD 10 42   	  LDA $4210
+(00:8050)  20 BF 80   	  JSR Draw__update
+(00:8053)  7A         	  PLY
+(00:8054)  FA         	  PLX
+(00:8055)  68         	  PLA
+(00:8056)  2B         	  PLD
+(00:8057)  40         	  RTI
+(00:8058)             Game__joy:
+(00:8058)  08         	  PHP
+(00:8059)  DA         	  PHX
+(00:805A)  C2 30      	  REP #$30
+(00:805C)  A5 00      	  LDA $00
+(00:805E)  AA         	  TAX
+(00:805F)  29 00 01   	  AND #$0100
+(00:8062)  D0 08      	  BNE Game__joy__right
+(00:8064)  8A         	  TXA
+(00:8065)  29 00 02   	  AND #$0200
+(00:8068)  D0 0C      	  BNE Game__joy__left
+(00:806A)  80 12      	  BRA Game__joy__vertical
+(00:806C)             Game__joy__right:
+(00:806C)  A5 12      	  LDA $12
+(00:806E)  1A         	  INC
+(00:806F)  29 1F 00   	  AND #$001F
+(00:8072)  85 12      	  STA $12
+(00:8074)  80 08      	  BRA Game__joy__vertical
+(00:8076)             Game__joy__left:
+(00:8076)  A5 12      	  LDA $12
+(00:8078)  3A         	  DEC
+(00:8079)  29 1F 00   	  AND #$001F
+(00:807C)  85 12      	  STA $12
+(00:807E)             Game__joy__vertical:
+(00:807E)  8A         	  TXA
+(00:807F)  29 00 08   	  AND #$0800
+(00:8082)  D0 08      	  BNE Game__joy__up
+(00:8084)  8A         	  TXA
+(00:8085)  29 00 04   	  AND #$0400
+(00:8088)  D0 0E      	  BNE Game__joy__down
+(00:808A)  80 19      	  BRA Game__joy__exit
+(00:808C)             Game__joy__up:
+(00:808C)  A5 14      	  LDA $14
+(00:808E)  3A         	  DEC
+(00:808F)  10 03      	  BPL Game__joy__overflow1
+(00:8091)  A9 1B 00   	  LDA #$001B
+(00:8094)             Game__joy__overflow1:
+(00:8094)  85 14      	  STA $14
+(00:8096)  80 0D      	  BRA Game__joy__exit
+(00:8098)             Game__joy__down:
+(00:8098)  A5 14      	  LDA $14
+(00:809A)  1A         	  INC
+(00:809B)  C9 1C 00   	  CMP #$001C
+(00:809E)  90 03      	  BCC Game__joy__overflow2
+(00:80A0)  A9 00 00   	  LDA #$0000
+(00:80A3)             Game__joy__overflow2:
+(00:80A3)  85 14      	  STA $14
+(00:80A5)             Game__joy__exit:
+(00:80A5)  FA         	  PLX
+(00:80A6)  28         	  PLP
+(00:80A7)  60         	  RTS
+(00:80A8)             Draw__init:
+(00:80A8)  08         	  PHP
+(00:80A9)  C2 30      	  REP #$30
+(00:80AB)  64 04      	  STZ $04
+(00:80AD)  64 06      	  STZ $06
+(00:80AF)  64 0A      	  STZ $0A
+(00:80B1)  A9 02 00   	  LDA #$0002
+(00:80B4)  85 12      	  STA $12
+(00:80B6)  85 14      	  STA $14
+(00:80B8)  A9 02 00   	  LDA #$0002
+(00:80BB)  85 08      	  STA $08
+(00:80BD)  28         	  PLP
+(00:80BE)  60         	  RTS
+(00:80BF)             Draw__update:
+(00:80BF)  08         	  PHP
+(00:80C0)  C2 30      	  REP #$30
+(00:80C2)  A5 08      	  LDA $08
+(00:80C4)  D0 0E      	  BNE Draw__update__exit
+(00:80C6)  A9 02 00   	  LDA #$0002
+(00:80C9)  85 08      	  STA $08
+(00:80CB)  20 D9 80   	  JSR Draw__render_logo
+(00:80CE)  20 58 80   	  JSR Game__joy
+(00:80D1)  20 25 81   	  JSR Draw__render_text
+(00:80D4)             Draw__update__exit:
+(00:80D4)  CE 08 00   	  DEC $0008
+(00:80D7)  28         	  PLP
+(00:80D8)  60         	  RTS
+(00:80D9)             Draw__render_logo:
+(00:80D9)  08         	  PHP
+(00:80DA)  DA         	  PHX
+(00:80DB)  A5 0A      	  LDA $0A
+(00:80DD)  D0 43      	  BNE Draw__render_logo__exit
+(00:80DF)  1A         	  INC
+(00:80E0)  85 0A      	  STA $0A
+(00:80E2)  64 16      	  STZ $16
+(00:80E4)             Draw__render_logo__next_row:
+(00:80E4)  A2 00 00   	  LDX #$0000
+(00:80E7)             Draw__render_logo__next_col:
+(00:80E7)  A5 16      	  LDA $16
+(00:80E9)  0A         	  ASL
+(00:80EA)  0A         	  ASL
+(00:80EB)  0A         	  ASL
+(00:80EC)  0A         	  ASL
+(00:80ED)  0A         	  ASL
+(00:80EE)  18         	  CLC
+(00:80EF)  69 2C 11   	  ADC #$112C
+(00:80F2)  85 0C      	  STA $0C
+(00:80F4)  8A         	  TXA
+(00:80F5)  18         	  CLC
+(00:80F6)  6D 0C 00   	  ADC $000C
+(00:80F9)  8D 16 21   	  STA $2116
+(00:80FC)  A5 16      	  LDA $16
+(00:80FE)  0A         	  ASL
+(00:80FF)  0A         	  ASL
+(00:8100)  0A         	  ASL
+(00:8101)  0A         	  ASL
+(00:8102)  18         	  CLC
+(00:8103)  69 A0 24   	  ADC #$24A0
+(00:8106)  85 0C      	  STA $0C
+(00:8108)  8A         	  TXA
+(00:8109)  18         	  CLC
+(00:810A)  6D 0C 00   	  ADC $000C
+(00:810D)  8D 18 21   	  STA $2118
+(00:8110)  E8         	  INX
+(00:8111)  E0 08 00   	  CPX #$0008
+(00:8114)  90 D1      	  BCC Draw__render_logo__next_col
+(00:8116)  A5 16      	  LDA $16
+(00:8118)  1A         	  INC
+(00:8119)  C9 07 00   	  CMP #$0007
+(00:811C)  B0 04      	  BCS Draw__render_logo__exit
+(00:811E)  85 16      	  STA $16
+(00:8120)  80 C2      	  BRA Draw__render_logo__next_row
+(00:8122)             Draw__render_logo__exit:
+(00:8122)  FA         	  PLX
+(00:8123)  28         	  PLP
+(00:8124)  60         	  RTS
+(00:8125)             Draw__render_text:
+(00:8125)  08         	  PHP
+(00:8126)  DA         	  PHX
+(00:8127)  64 0C      	  STZ $0C
+(00:8129)  A5 14      	  LDA $14
+(00:812B)  0A         	  ASL
+(00:812C)  0A         	  ASL
+(00:812D)  0A         	  ASL
+(00:812E)  0A         	  ASL
+(00:812F)  0A         	  ASL
+(00:8130)  18         	  CLC
+(00:8131)  6D 12 00   	  ADC $0012
+(00:8134)  18         	  CLC
+(00:8135)  69 00 10   	  ADC #$1000
+(00:8138)  8D 16 21   	  STA $2116
+(00:813B)  A9 90 20   	  LDA #$2090
+(00:813E)  8D 18 21   	  STA $2118
+(00:8141)  A5 06      	  LDA $06
+(00:8143)  29 FF 00   	  AND #$00FF
+(00:8146)  D0 23      	  BNE Draw__render_text__exit
+(00:8148)  A5 04      	  LDA $04
+(00:814A)  AA         	  TAX
+(00:814B)  EE 04 00   	  INC $0004
+(00:814E)  18         	  CLC
+(00:814F)  69 45 12   	  ADC #$1245
+(00:8152)  8D 16 21   	  STA $2116
+(00:8155)  BD 6E 81   	  LDA Draw__hello_str, X
+(00:8158)  29 FF 00   	  AND #$00FF
+(00:815B)  D0 07      	  BNE Draw__render_text__draw_char
+(00:815D)  A9 FF 00   	  LDA #$00FF
+(00:8160)  85 06      	  STA $06
+(00:8162)  80 07      	  BRA Draw__render_text__exit
+(00:8164)             Draw__render_text__draw_char:
+(00:8164)  18         	  CLC
+(00:8165)  69 00 20   	  ADC #$2000
+(00:8168)  8D 18 21   	  STA $2118
+(00:816B)             Draw__render_text__exit:
+(00:816B)  FA         	  PLX
+(00:816C)  28         	  PLP
+(00:816D)  60         	  RTS
+(00:816E)             Draw__hello_str:
+(00:816E)  90 20 7E   	.text "� ~hello, sparkle"
+(00:8185)             GfxCore__load_font:
+(00:8185)  08         	  PHP
+(00:8186)  DA         	  PHX
+(00:8187)  C2 10      	  REP #$10
+(00:8189)  E2 20      	  SEP #$20
+(00:818B)  A9 80      	  LDA #$80
+(00:818D)  8D 15 21   	  STA $2115
+(00:8190)  A2 00 00   	  LDX #$0000
+(00:8193)  8E 16 21   	  STX $2116
+(00:8196)  A2 00 00   	  LDX #$0000
+(00:8199)  C2 30      	  REP #$30
+(00:819B)             GfxCore__load_font__loop:
+(00:819B)  BD 00 90   	  LDA GfxCore__font, X
+(00:819E)  8D 18 21   	  STA $2118
+(00:81A1)  E8         	  INX
+(00:81A2)  E8         	  INX
+(00:81A3)  E0 00 10   	  CPX #$1000
+(00:81A6)  D0 F3      	  BNE GfxCore__load_font__loop
+(00:81A8)  FA         	  PLX
+(00:81A9)  28         	  PLP
+(00:81AA)  60         	  RTS
+(00:81AB)             GfxCore__load_palettes:
+(00:81AB)  08         	  PHP
+(00:81AC)  DA         	  PHX
+(00:81AD)  C2 10      	  REP #$10
+(00:81AF)  E2 20      	  SEP #$20
+(00:81B1)  9C 21 21   	  STZ $2121
+(00:81B4)  A2 00 00   	  LDX #$0000
+(00:81B7)             GfxCore__load_palettes__loop:
+(00:81B7)  BD 00 88   	  LDA GfxCore__palette, X
+(00:81BA)  8D 22 21   	  STA $2122
+(00:81BD)  E8         	  INX
+(00:81BE)  E0 10 00   	  CPX #$0010
+(00:81C1)  90 F4      	  BCC GfxCore__load_palettes__loop
+(00:81C3)  FA         	  PLX
+(00:81C4)  28         	  PLP
+(00:81C5)  60         	  RTS
+(00:81C6)             	* = $8800
+(00:8800)             GfxCore__palette:
+(00:8800)  FF 7F      	.text "�"
+(00:8802)  BB 02      	.text "�"
+(00:8804)  1D 13      	.text ""
+(00:8806)  53 59      	.text "SY"
+(00:8808)  FF 7F      	.text "�"
+(00:880A)  53 59      	.text "SY"
+(00:880C)  79 02      	.text "y"
+(00:880E)  DA 6D      	.text "�m"
+(00:8810)             	* = $9000
+(00:9000)             GfxCore__font:
+(00:9000)  00 00 00   	.text ""
+(00:A000)             	* = $FFC0
+(00:FFC0)             Header__rom_name:
+(00:FFC0)  53 50 41   	.text "SPARKLES"
+(00:FFC8)             	* = $FFD5
+(00:FFD5)             Header__rom_info:
+(00:FFD5)  30 00 05   	.byte $30,$0,$5,$0
+(00:FFD9)  AA AA      	.word $aaaa
+(00:FFDB)  55 55      	.word $5555
+(00:FFDD)             	* = $FFE0
+(00:FFE0)             Header__vectors_native:
+(00:FFE0)  00 00      	.byte $0,$0
+(00:FFE2)  00 00      	.byte $0,$0
+(00:FFE4)  06 80      	.word $8006
+(00:FFE6)  06 80      	.word $8006
+(00:FFE8)  06 80      	.word $8006
+(00:FFEA)  03 80      	.word $8003
+(00:FFEC)  00 80      	.word $8000
+(00:FFEE)  06 80      	.word $8006
+(00:FFF0)             	* = $FFF0
+(00:FFF0)             Header__vectors_emulation:
+(00:FFF0)  00 00      	.byte $0,$0
+(00:FFF2)  00 00      	.byte $0,$0
+(00:FFF4)  06 80      	.word $8006
+(00:FFF6)  00 00      	.byte $0,$0
+(00:FFF8)  06 80      	.word $8006
+(00:FFFA)  03 80      	.word $8003
+(00:FFFC)  00 80      	.word $8000
+(00:FFFE)  06 80      	.word $8006
+(01:8000)             	.bend
+
+code[fragment]          0x0 (00:8000) Program.main
+code[fragment]          0x3 (00:8003) Program.nmi
+code[fragment]          0x6 (00:8006) Program.rti
+
+code[fragment]          0x7 (00:8007) Game.start
+code[fragment]         0x3A (00:803A) Game.game_loop
+code[fragment]         0x45 (00:8045) Game.vblank
+code[sub]              0x58 (00:8058) Game.joy
+
+code[sub]              0xA8 (00:80A8) Draw.init
+code[sub]              0xBF (00:80BF) Draw.update
+code[sub]              0xD9 (00:80D9) Draw.render_logo
+code[sub]             0x125 (00:8125) Draw.render_text
+data                  0x16E (00:816E) Draw.hello_str
+
+code[sub]             0x185 (00:8185) GfxCore.load_font
+code[sub]             0x1AB (00:81AB) GfxCore.load_palettes
+data                  0x800 (00:8800) GfxCore.palette
+data                 0x1000 (00:9000) GfxCore.font
+
+data                 0x7FC0 (00:FFC0) Header.rom_name
+data                 0x7FD5 (00:FFD5) Header.rom_info
+data                 0x7FE0 (00:FFE0) Header.vectors_native
+data                 0x7FF0 (00:FFF0) Header.vectors_emulation
+
+end rom              0x8000 (01:8000)
+
+var                     0x0 (00:0000) Game.var_joy
+
+var                     0x2 (00:0002) Draw.var_pos
+var                     0x4 (00:0004) Draw.var_pos
+var                     0x6 (00:0006) Draw.var_text_drawn
+var                     0x8 (00:0008) Draw.var_draw_wait
+var                     0xA (00:000A) Draw.var_logo_drawn
+var                     0xC (00:000C) Draw.var_tmp1
+var                     0xE (00:000E) Draw.var_tmp2
+var                    0x10 (00:0010) Draw.var_tmp3
+var                    0x12 (00:0012) Draw.var_curs_x
+var                    0x14 (00:0014) Draw.var_curs_y
+var                    0x16 (00:0016) Draw.var_logo_row
+
+end vars               0x18 (00:0018)
+
+Written to: out/sparkles.sfc
