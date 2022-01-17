@@ -1,0 +1,1267 @@
+{
+  "adc": {
+    "a": {
+      "byte": "6D",
+      "cycles": 4
+    },
+    "ax": {
+      "byte": "7D",
+      "cycles": 4
+    },
+    "ay": {
+      "byte": "79",
+      "cycles": 4
+    },
+    "al": {
+      "byte": "6F",
+      "cycles": 5
+    },
+    "alx": {
+      "byte": "7F",
+      "cycles": 5
+    },
+    "z": {
+      "byte": "65",
+      "cycles": 3
+    },
+    "zx": {
+      "byte": "75",
+      "cycles": 4
+    },
+    "zr": {
+      "byte": "72",
+      "cycles": 5
+    },
+    "zrl": {
+      "byte": "67",
+      "cycles": 6
+    },
+    "zxr": {
+      "byte": "61",
+      "cycles": 6
+    },
+    "zry": {
+      "byte": "71",
+      "cycles": 5
+    },
+    "zrly": {
+      "byte": "77",
+      "cycles": 6
+    },
+    "i8": {
+      "byte": "69",
+      "cycles": 2
+    },
+    "i16": {
+      "byte": "69",
+      "cycles": 2
+    },
+    "sry": {
+      "byte": "73",
+      "cycles": 7
+    },
+    "s": {
+      "byte": "63",
+      "cycles": 4
+    }
+  },
+  "anda": {
+    "i8": {
+      "byte": "29",
+      "cycles": 2
+    },
+    "i16": {
+      "byte": "29",
+      "cycles": 2
+    },
+    "a": {
+      "byte": "2D",
+      "cycles": 4
+    },
+    "ax": {
+      "byte": "3D",
+      "cycles": 4
+    },
+    "ay": {
+      "byte": "39",
+      "cycles": 4
+    },
+    "al": {
+      "byte": "2F",
+      "cycles": 5
+    },
+    "alx": {
+      "byte": "3F",
+      "cycles": 5
+    },
+    "z": {
+      "byte": "25",
+      "cycles": 3
+    },
+    "zx": {
+      "byte": "35",
+      "cycles": 4
+    },
+    "zr": {
+      "byte": "32",
+      "cycles": 5
+    },
+    "zrl": {
+      "byte": "27",
+      "cycles": 6
+    },
+    "zxr": {
+      "byte": "21",
+      "cycles": 6
+    },
+    "zry": {
+      "byte": "31",
+      "cycles": 5
+    },
+    "zrly": {
+      "byte": "37",
+      "cycles": 6
+    },
+    "sry": {
+      "byte": "33",
+      "cycles": 7
+    },
+    "s": {
+      "byte": "23",
+      "cycles": 4
+    }
+  },
+  "asl": {
+    "a": {
+      "byte": "0E",
+      "cycles": 6
+    },
+    "ax": {
+      "byte": "1E",
+      "cycles": 7
+    },
+    "n": {
+      "byte": "0A",
+      "cycles": 2
+    },
+    "z": {
+      "byte": "6",
+      "cycles": 5
+    },
+    "zx": {
+      "byte": "16",
+      "cycles": 6
+    }
+  },
+  "bcc": {
+    "r": {
+      "byte": "90",
+      "cycles": 2,
+      "branch": true
+    }
+  },
+  "bcs": {
+    "r": {
+      "byte": "B0",
+      "cycles": 2,
+      "branch": true
+    }
+  },
+  "beq": {
+    "r": {
+      "byte": "F0",
+      "cycles": 2,
+      "branch": true
+    }
+  },
+  "bit": {
+    "a": {
+      "byte": "2C",
+      "cycles": 4
+    },
+    "ax": {
+      "byte": "3C",
+      "cycles": 4
+    },
+    "z": {
+      "byte": "24",
+      "cycles": 3
+    },
+    "zx": {
+      "byte": "34",
+      "cycles": 4
+    },
+    "i8": {
+      "byte": "89",
+      "cycles": 2
+    },
+    "i16": {
+      "byte": "89",
+      "cycles": 2
+    }
+  },
+  "bmi": {
+    "r": {
+      "byte": "30",
+      "cycles": 2,
+      "branch": true
+    }
+  },
+  "bne": {
+    "r": {
+      "byte": "D0",
+      "cycles": 2,
+      "branch": true
+    }
+  },
+  "bpl": {
+    "r": {
+      "byte": "10",
+      "cycles": 2,
+      "branch": true
+    }
+  },
+  "bra": {
+    "r": {
+      "byte": "80",
+      "cycles": 3,
+      "branch": true
+    }
+  },
+  "brk": {
+    "i8": {
+      "byte": "0",
+      "cycles": 7
+    }
+  },
+  "brl": {
+    "a": {
+      "byte": "82",
+      "cycles": 4
+    }
+  },
+  "bvc": {
+    "r": {
+      "byte": "50",
+      "cycles": 2,
+      "branch": true
+    }
+  },
+  "bvs": {
+    "r": {
+      "byte": "70",
+      "cycles": 2,
+      "branch": true
+    }
+  },
+  "clc": {
+    "n": {
+      "byte": "18",
+      "cycles": 2
+    }
+  },
+  "cld": {
+    "n": {
+      "byte": "D8",
+      "cycles": 2
+    }
+  },
+  "cli": {
+    "n": {
+      "byte": "58",
+      "cycles": 2
+    }
+  },
+  "clv": {
+    "n": {
+      "byte": "B8",
+      "cycles": 2
+    }
+  },
+  "cmp": {
+    "a": {
+      "byte": "CD",
+      "cycles": 4
+    },
+    "ax": {
+      "byte": "DD",
+      "cycles": 4
+    },
+    "ay": {
+      "byte": "D9",
+      "cycles": 4
+    },
+    "al": {
+      "byte": "CF",
+      "cycles": 5
+    },
+    "alx": {
+      "byte": "DF",
+      "cycles": 5
+    },
+    "z": {
+      "byte": "C5",
+      "cycles": 3
+    },
+    "zx": {
+      "byte": "D5",
+      "cycles": 4
+    },
+    "zr": {
+      "byte": "D2",
+      "cycles": 5
+    },
+    "zrl": {
+      "byte": "C7",
+      "cycles": 6
+    },
+    "zxr": {
+      "byte": "C1",
+      "cycles": 6
+    },
+    "zry": {
+      "byte": "D1",
+      "cycles": 5
+    },
+    "zrly": {
+      "byte": "D7",
+      "cycles": 6
+    },
+    "i8": {
+      "byte": "C9",
+      "cycles": 2
+    },
+    "i16": {
+      "byte": "C9",
+      "cycles": 2
+    },
+    "sry": {
+      "byte": "D3",
+      "cycles": 7
+    },
+    "s": {
+      "byte": "C3",
+      "cycles": 4
+    }
+  },
+  "cop": {
+    "i8": {
+      "byte": "2",
+      "cycles": 7
+    }
+  },
+  "cpx": {
+    "a": {
+      "byte": "EC",
+      "cycles": 4
+    },
+    "z": {
+      "byte": "E4",
+      "cycles": 3
+    },
+    "i8": {
+      "byte": "E0",
+      "cycles": 2
+    },
+    "i16": {
+      "byte": "E0",
+      "cycles": 2
+    }
+  },
+  "cpy": {
+    "a": {
+      "byte": "CC",
+      "cycles": 4
+    },
+    "z": {
+      "byte": "C4",
+      "cycles": 3
+    },
+    "i8": {
+      "byte": "C0",
+      "cycles": 2
+    },
+    "i16": {
+      "byte": "C0",
+      "cycles": 2
+    }
+  },
+  "dec": {
+    "a": {
+      "byte": "CE",
+      "cycles": 6
+    },
+    "ax": {
+      "byte": "DE",
+      "cycles": 7
+    },
+    "n": {
+      "byte": "3A",
+      "cycles": 2
+    },
+    "z": {
+      "byte": "C6",
+      "cycles": 5
+    },
+    "zx": {
+      "byte": "D6",
+      "cycles": 6
+    }
+  },
+  "dex": {
+    "n": {
+      "byte": "CA",
+      "cycles": 2
+    }
+  },
+  "dey": {
+    "n": {
+      "byte": "88",
+      "cycles": 2
+    }
+  },
+  "eor": {
+    "a": {
+      "byte": "4D",
+      "cycles": 4
+    },
+    "ax": {
+      "byte": "5D",
+      "cycles": 4
+    },
+    "ay": {
+      "byte": "59",
+      "cycles": 4
+    },
+    "al": {
+      "byte": "4F",
+      "cycles": 5
+    },
+    "alx": {
+      "byte": "5F",
+      "cycles": 5
+    },
+    "z": {
+      "byte": "45",
+      "cycles": 3
+    },
+    "zx": {
+      "byte": "55",
+      "cycles": 4
+    },
+    "zr": {
+      "byte": "52",
+      "cycles": 5
+    },
+    "zrl": {
+      "byte": "47",
+      "cycles": 6
+    },
+    "zxr": {
+      "byte": "41",
+      "cycles": 6
+    },
+    "zry": {
+      "byte": "51",
+      "cycles": 5
+    },
+    "zrly": {
+      "byte": "57",
+      "cycles": 6
+    },
+    "i8": {
+      "byte": "49",
+      "cycles": 2
+    },
+    "i16": {
+      "byte": "49",
+      "cycles": 2
+    },
+    "sry": {
+      "byte": "53",
+      "cycles": 7
+    },
+    "s": {
+      "byte": "43",
+      "cycles": 4
+    }
+  },
+  "inc": {
+    "a": {
+      "byte": "EE",
+      "cycles": 6
+    },
+    "ax": {
+      "byte": "FE",
+      "cycles": 7
+    },
+    "n": {
+      "byte": "1A",
+      "cycles": 2
+    },
+    "z": {
+      "byte": "E6",
+      "cycles": 5
+    },
+    "zx": {
+      "byte": "F6",
+      "cycles": 6
+    }
+  },
+  "inx": {
+    "n": {
+      "byte": "E8",
+      "cycles": 2
+    }
+  },
+  "iny": {
+    "n": {
+      "byte": "C8",
+      "cycles": 2
+    }
+  },
+  "jml": {
+    "arl": {
+      "byte": "DC",
+      "cycles": 6
+    },
+    "al": {
+      "byte": "5C",
+      "cycles": 4
+    }
+  },
+  "jmp": {
+    "a": {
+      "byte": "4C",
+      "cycles": 3
+    },
+    "axr": {
+      "byte": "7C",
+      "cycles": 6
+    },
+    "ar": {
+      "byte": "6C",
+      "cycles": 5
+    }
+  },
+  "jsl": {
+    "al": {
+      "byte": "22",
+      "cycles": 8
+    }
+  },
+  "jsr": {
+    "a": {
+      "byte": "20",
+      "cycles": 6
+    },
+    "axr": {
+      "byte": "FC",
+      "cycles": 8
+    }
+  },
+  "lda": {
+    "a": {
+      "byte": "AD",
+      "cycles": 4
+    },
+    "ax": {
+      "byte": "BD",
+      "cycles": 4
+    },
+    "ay": {
+      "byte": "B9",
+      "cycles": 4
+    },
+    "al": {
+      "byte": "AF",
+      "cycles": 5
+    },
+    "alx": {
+      "byte": "BF",
+      "cycles": 5
+    },
+    "z": {
+      "byte": "A5",
+      "cycles": 3
+    },
+    "zx": {
+      "byte": "B5",
+      "cycles": 4
+    },
+    "zr": {
+      "byte": "B2",
+      "cycles": 5
+    },
+    "zrl": {
+      "byte": "A7",
+      "cycles": 6
+    },
+    "zxr": {
+      "byte": "A1",
+      "cycles": 6
+    },
+    "zry": {
+      "byte": "B1",
+      "cycles": 5
+    },
+    "zrly": {
+      "byte": "B7",
+      "cycles": 6
+    },
+    "i8": {
+      "byte": "A9",
+      "cycles": 2
+    },
+    "i16": {
+      "byte": "A9",
+      "cycles": 2
+    },
+    "sry": {
+      "byte": "B3",
+      "cycles": 7
+    },
+    "s": {
+      "byte": "A3",
+      "cycles": 4
+    }
+  },
+  "ldx": {
+    "a": {
+      "byte": "AE",
+      "cycles": 4
+    },
+    "ay": {
+      "byte": "BE",
+      "cycles": 4
+    },
+    "z": {
+      "byte": "A6",
+      "cycles": 3
+    },
+    "zy": {
+      "byte": "B6",
+      "cycles": 4
+    },
+    "i8": {
+      "byte": "A2",
+      "cycles": 2
+    },
+    "i16": {
+      "byte": "A2",
+      "cycles": 2
+    }
+  },
+  "ldy": {
+    "a": {
+      "byte": "AC",
+      "cycles": 4
+    },
+    "ax": {
+      "byte": "BC",
+      "cycles": 4
+    },
+    "z": {
+      "byte": "A4",
+      "cycles": 3
+    },
+    "zx": {
+      "byte": "B4",
+      "cycles": 4
+    },
+    "i8": {
+      "byte": "A0",
+      "cycles": 2
+    },
+    "i16": {
+      "byte": "A0",
+      "cycles": 2
+    }
+  },
+  "lsr": {
+    "a": {
+      "byte": "4E",
+      "cycles": 6
+    },
+    "ax": {
+      "byte": "5E",
+      "cycles": 7
+    },
+    "n": {
+      "byte": "4A",
+      "cycles": 2
+    },
+    "z": {
+      "byte": "46",
+      "cycles": 5
+    },
+    "zx": {
+      "byte": "56",
+      "cycles": 6
+    }
+  },
+  "mvn": {
+    "mv": {
+      "byte": "54",
+      "cycles": 0
+    }
+  },
+  "mvp": {
+    "mv": {
+      "byte": "44",
+      "cycles": 0
+    }
+  },
+  "nop": {
+    "n": {
+      "byte": "EA",
+      "cycles": 2
+    }
+  },
+  "ora": {
+    "a": {
+      "byte": "0D",
+      "cycles": 4
+    },
+    "ax": {
+      "byte": "1D",
+      "cycles": 4
+    },
+    "ay": {
+      "byte": "19",
+      "cycles": 4
+    },
+    "al": {
+      "byte": "0F",
+      "cycles": 5
+    },
+    "alx": {
+      "byte": "1F",
+      "cycles": 5
+    },
+    "z": {
+      "byte": "5",
+      "cycles": 3
+    },
+    "zx": {
+      "byte": "15",
+      "cycles": 4
+    },
+    "zr": {
+      "byte": "12",
+      "cycles": 5
+    },
+    "zrl": {
+      "byte": "7",
+      "cycles": 6
+    },
+    "zxr": {
+      "byte": "1",
+      "cycles": 6
+    },
+    "zry": {
+      "byte": "11",
+      "cycles": 5
+    },
+    "zrly": {
+      "byte": "17",
+      "cycles": 6
+    },
+    "i8": {
+      "byte": "9",
+      "cycles": 2
+    },
+    "i16": {
+      "byte": "9",
+      "cycles": 2
+    },
+    "sry": {
+      "byte": "13",
+      "cycles": 7
+    },
+    "s": {
+      "byte": "3",
+      "cycles": 4
+    }
+  },
+  "pea": {
+    "a": {
+      "byte": "F4",
+      "cycles": 5
+    }
+  },
+  "pei": {
+    "zr": {
+      "byte": "D4",
+      "cycles": 6
+    }
+  },
+  "per": {
+    "a": {
+      "byte": "62",
+      "cycles": 6
+    }
+  },
+  "pha": {
+    "n": {
+      "byte": "48",
+      "cycles": 3
+    }
+  },
+  "phb": {
+    "n": {
+      "byte": "8B",
+      "cycles": 3
+    }
+  },
+  "phd": {
+    "n": {
+      "byte": "0B",
+      "cycles": 4
+    }
+  },
+  "phk": {
+    "n": {
+      "byte": "4B",
+      "cycles": 3
+    }
+  },
+  "php": {
+    "n": {
+      "byte": "8",
+      "cycles": 3
+    }
+  },
+  "phx": {
+    "n": {
+      "byte": "DA",
+      "cycles": 3
+    }
+  },
+  "phy": {
+    "n": {
+      "byte": "5A",
+      "cycles": 3
+    }
+  },
+  "pla": {
+    "n": {
+      "byte": "68",
+      "cycles": 4
+    }
+  },
+  "plb": {
+    "n": {
+      "byte": "AB",
+      "cycles": 4
+    }
+  },
+  "pld": {
+    "n": {
+      "byte": "2B",
+      "cycles": 5
+    }
+  },
+  "plp": {
+    "n": {
+      "byte": "28",
+      "cycles": 4
+    }
+  },
+  "plx": {
+    "n": {
+      "byte": "FA",
+      "cycles": 4
+    }
+  },
+  "ply": {
+    "n": {
+      "byte": "7A",
+      "cycles": 4
+    }
+  },
+  "rep": {
+    "i8": {
+      "byte": "C2",
+      "cycles": 3
+    }
+  },
+  "rol": {
+    "a": {
+      "byte": "2E",
+      "cycles": 6
+    },
+    "ax": {
+      "byte": "3E",
+      "cycles": 7
+    },
+    "n": {
+      "byte": "2A",
+      "cycles": 2
+    },
+    "z": {
+      "byte": "26",
+      "cycles": 5
+    },
+    "zx": {
+      "byte": "36",
+      "cycles": 6
+    }
+  },
+  "ror": {
+    "a": {
+      "byte": "6E",
+      "cycles": 6
+    },
+    "ax": {
+      "byte": "7E",
+      "cycles": 7
+    },
+    "n": {
+      "byte": "6A",
+      "cycles": 2
+    },
+    "z": {
+      "byte": "66",
+      "cycles": 5
+    },
+    "zx": {
+      "byte": "76",
+      "cycles": 6
+    }
+  },
+  "rti": {
+    "n": {
+      "byte": "40",
+      "cycles": 6
+    }
+  },
+  "rtl": {
+    "n": {
+      "byte": "6B",
+      "cycles": 6
+    }
+  },
+  "rts": {
+    "n": {
+      "byte": "60",
+      "cycles": 6
+    }
+  },
+  "sbc": {
+    "a": {
+      "byte": "ED",
+      "cycles": 4
+    },
+    "ax": {
+      "byte": "FD",
+      "cycles": 4
+    },
+    "ay": {
+      "byte": "F9",
+      "cycles": 4
+    },
+    "al": {
+      "byte": "EF",
+      "cycles": 5
+    },
+    "alx": {
+      "byte": "FF",
+      "cycles": 5
+    },
+    "z": {
+      "byte": "E5",
+      "cycles": 3
+    },
+    "zx": {
+      "byte": "F5",
+      "cycles": 4
+    },
+    "zr": {
+      "byte": "F2",
+      "cycles": 5
+    },
+    "zrl": {
+      "byte": "E7",
+      "cycles": 6
+    },
+    "zxr": {
+      "byte": "E1",
+      "cycles": 6
+    },
+    "zry": {
+      "byte": "F1",
+      "cycles": 5
+    },
+    "zrly": {
+      "byte": "F7",
+      "cycles": 6
+    },
+    "i8": {
+      "byte": "E9",
+      "cycles": 2
+    },
+    "i16": {
+      "byte": "E9",
+      "cycles": 2
+    },
+    "sry": {
+      "byte": "F3",
+      "cycles": 7
+    },
+    "s": {
+      "byte": "E3",
+      "cycles": 4
+    }
+  },
+  "sec": {
+    "n": {
+      "byte": "38",
+      "cycles": 2
+    }
+  },
+  "sed": {
+    "n": {
+      "byte": "F8",
+      "cycles": 2
+    }
+  },
+  "sei": {
+    "n": {
+      "byte": "78",
+      "cycles": 2
+    }
+  },
+  "sep": {
+    "i8": {
+      "byte": "E2",
+      "cycles": 3
+    }
+  },
+  "sta": {
+    "a": {
+      "byte": "8D",
+      "cycles": 4
+    },
+    "ax": {
+      "byte": "9D",
+      "cycles": 5
+    },
+    "ay": {
+      "byte": "99",
+      "cycles": 5
+    },
+    "al": {
+      "byte": "8F",
+      "cycles": 5
+    },
+    "alx": {
+      "byte": "9F",
+      "cycles": 5
+    },
+    "z": {
+      "byte": "85",
+      "cycles": 3
+    },
+    "zx": {
+      "byte": "95",
+      "cycles": 4
+    },
+    "zr": {
+      "byte": "92",
+      "cycles": 5
+    },
+    "zrl": {
+      "byte": "87",
+      "cycles": 6
+    },
+    "zxr": {
+      "byte": "81",
+      "cycles": 6
+    },
+    "zry": {
+      "byte": "91",
+      "cycles": 6
+    },
+    "zrly": {
+      "byte": "97",
+      "cycles": 6
+    },
+    "sry": {
+      "byte": "93",
+      "cycles": 7
+    },
+    "s": {
+      "byte": "83",
+      "cycles": 4
+    }
+  },
+  "stp": {
+    "n": {
+      "byte": "DB",
+      "cycles": 3
+    }
+  },
+  "stx": {
+    "a": {
+      "byte": "8E",
+      "cycles": 4
+    },
+    "z": {
+      "byte": "86",
+      "cycles": 3
+    },
+    "zy": {
+      "byte": "96",
+      "cycles": 4
+    }
+  },
+  "sty": {
+    "a": {
+      "byte": "8C",
+      "cycles": 4
+    },
+    "z": {
+      "byte": "84",
+      "cycles": 3
+    },
+    "zx": {
+      "byte": "94",
+      "cycles": 4
+    }
+  },
+  "stz": {
+    "a": {
+      "byte": "9C",
+      "cycles": 4
+    },
+    "ax": {
+      "byte": "9E",
+      "cycles": 5
+    },
+    "z": {
+      "byte": "64",
+      "cycles": 3
+    },
+    "zx": {
+      "byte": "74",
+      "cycles": 4
+    }
+  },
+  "tax": {
+    "n": {
+      "byte": "AA",
+      "cycles": 2
+    }
+  },
+  "tay": {
+    "n": {
+      "byte": "A8",
+      "cycles": 2
+    }
+  },
+  "tcd": {
+    "n": {
+      "byte": "5B",
+      "cycles": 2
+    }
+  },
+  "tcs": {
+    "n": {
+      "byte": "1B",
+      "cycles": 2
+    }
+  },
+  "tdc": {
+    "n": {
+      "byte": "7B",
+      "cycles": 2
+    }
+  },
+  "trb": {
+    "a": {
+      "byte": "1C",
+      "cycles": 6
+    },
+    "z": {
+      "byte": "14",
+      "cycles": 5
+    }
+  },
+  "tsb": {
+    "a": {
+      "byte": "0C",
+      "cycles": 6
+    },
+    "z": {
+      "byte": "4",
+      "cycles": 5
+    }
+  },
+  "tsc": {
+    "n": {
+      "byte": "3B",
+      "cycles": 2
+    }
+  },
+  "tsx": {
+    "n": {
+      "byte": "BA",
+      "cycles": 2
+    }
+  },
+  "txa": {
+    "n": {
+      "byte": "8A",
+      "cycles": 2
+    }
+  },
+  "txs": {
+    "n": {
+      "byte": "9A",
+      "cycles": 2
+    }
+  },
+  "txy": {
+    "n": {
+      "byte": "9B",
+      "cycles": 2
+    }
+  },
+  "tya": {
+    "n": {
+      "byte": "98",
+      "cycles": 2
+    }
+  },
+  "tyx": {
+    "n": {
+      "byte": "BB",
+      "cycles": 2
+    }
+  },
+  "wai": {
+    "n": {
+      "byte": "CB",
+      "cycles": 3
+    }
+  },
+  "wdm": {
+    "n": {
+      "byte": "42",
+      "cycles": 2
+    }
+  },
+  "xba": {
+    "n": {
+      "byte": "EB",
+      "cycles": 3
+    }
+  },
+  "xce": {
+    "n": {
+      "byte": "FB",
+      "cycles": 2
+    }
+  }
+}
