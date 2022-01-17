@@ -4,6 +4,8 @@ This is a demo ROM made using a Ruby based SNES build tool I am building (includ
 
 It displays a logo and text on the screen. You can then use the D-pad to draw with a ✨ tile.
 
+Demo ROM: https://github.com/maddievision/sparkles-sfc/releases/tag/v0.0.1
+
 ## Screen cap
 
 ![GIF of sparkles.sfc emulation](https://github.com/maddievision/sparkles-sfc/blob/main/sparkles.gif?raw=true)
