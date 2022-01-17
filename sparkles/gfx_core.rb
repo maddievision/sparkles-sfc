@@ -3,10 +3,6 @@ require './lib/png_convert'
 
 module Sparkles
   class GfxCore < SnesBuilder::AssemblyModule
-    def self.name
-      "gfx_core"
-    end
-
     def_sub :load_font do
       php
       phx
@@ -15,20 +11,20 @@ module Sparkles
       sep 0x20
 
       lda.b 0x80
-      sta rVMAIN
-      ldx.w vram_charset
-      stx rVMADDL
+      sta Snes.reg_VMAIN
+      ldx.w Program.vram_charset
+      stx Snes.reg_VMADDL
       ldx.w 0
 
       rep 0x30
 
-      label _(:loop)
-      lda.ax __(:font)
-      sta rVMDATAL
+      label _ :loop
+      lda.ax GfxCore.font
+      sta Snes.reg_VMDATAL
       inx
       inx
       cpx.w 0x1000
-      bne _(:loop)
+      bne _ :loop
 
       plx
       plp
@@ -41,17 +37,17 @@ module Sparkles
       rep 0x10
       sep 0x20
 
-      stz rCGADD
+      stz Snes.reg_CGADD
 
       ldx.w 0
 
-      label _(:loop)
+      label _ :loop
 
-        lda.ax __(:palette)
-        sta rCGDATA
+        lda.ax GfxCore.palette
+        sta Snes.reg_CGDATA
         inx
         cpx.w 0x8 * 2
-        bcc _(:loop)
+        bcc _ :loop
 
       plx
       plp

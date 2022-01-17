@@ -2,49 +2,43 @@ require './lib/snes_builder'
 
 module Sparkles
   class Header < SnesBuilder::AssemblyModule
-    def self.name
-      "header"
-    end
+    SIZE_KB = 32      
 
-    def globals
-      size_kb = 32      
-      {
-        rom_size_kb: size_kb,
-        rom_size_exp: (Math.log(size_kb) / Math.log(2)).to_i,
-        rom_size_bytes: size_kb << 10,
-      }
-    end
+    global_var :rom_size_bytes, SIZE_KB << 10
+    global_var :memory_base, 0
+      
+    equate :rom_size_exp, (Math.log(SIZE_KB) / Math.log(2)).to_i
 
-    def_data :rom_name, 0xFFC0 do
+    def_data :rom_name, Snes.addr_rom_name do
       data "SPARKLES"
     end
 
-    def_data :rom_info, 0xFFD5 do
-      data [0x30, 0, rom_size_exp, 0]
+    def_data :rom_info, Snes.addr_rom_info do
+      data [0x30, 0, Header.rom_size_exp, 0]
       data 0xAAAA
       data 0x5555
     end    
 
-    def_data :vectors_native, 0xFFE0 do
+    def_data :vectors_native, Snes.addr_vectors_native do
       data [0, 0]
       data [0, 0]
-      data ___(:program, :rti)
-      data ___(:program, :rti)
-      data ___(:program, :rti)
-      data ___(:program, :nmi)
-      data ___(:program, :main)
-      data ___(:program, :rti)
+      data Program.rti
+      data Program.rti
+      data Program.rti
+      data Program.nmi
+      data Program.main
+      data Program.rti
     end
 
-    def_data :vectors_emulation, 0xFFF0 do
+    def_data :vectors_emulation, Snes.addr_vectors_emulation do
       data [0, 0]
       data [0, 0]
-      data ___(:program, :rti)
+      data Program.rti
       data [0, 0]
-      data ___(:program, :rti)
-      data ___(:program, :nmi)
-      data ___(:program, :main)
-      data ___(:program, :rti)
+      data Program.rti
+      data Program.nmi
+      data Program.main
+      data Program.rti
     end
   end
 end

@@ -795,10 +795,6 @@ module Snesasm
       end
     end
 
-    def ___ module_name, str
-      "#{module_name}__#{str}".to_sym
-    end
-
     def __ str
       "#{@module_name}__#{str}".to_sym
     end

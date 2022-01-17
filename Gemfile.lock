@@ -1,19 +1,13 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    bin_tools (0.0.3)
     chunky_png (1.4.0)
-    pastel (0.8.0)
-      tty-color (~> 0.5)
-    tty-color (0.6.0)
 
 PLATFORMS
   universal-darwin-21
 
 DEPENDENCIES
-  bin_tools (~> 0.0.3)
   chunky_png (~> 1.4)
-  pastel (~> 0.8.0)
 
 BUNDLED WITH
    2.2.28
